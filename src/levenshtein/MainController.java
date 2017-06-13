@@ -4,8 +4,6 @@ package levenshtein;
 import interfaz.LevenshteinInterfaz;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class MainController implements ActionListener{
@@ -135,4 +133,29 @@ public class MainController implements ActionListener{
         }
         
     }
+    
+    int Edit_Distance(String V, String U, int m, int n) {
+        
+        if (n == 0 && m == 0) //V && U igual a vacío
+        {
+            return 0;
+        }
+        if (n == 0) //U igual a vacío
+        {
+            return m;
+        }
+        if (m == 0) //V igual a vacío
+        {
+            return n;
+        }
+
+        int a = Edit_Distance(V, U, m - 1, n - 1) + ((V.charAt(n) != U.charAt(m)) ? 1:0);//Sustituir
+        int b = Edit_Distance(V, U, m - 1, n) + 1;//Eliminar
+        int c = Edit_Distance(V, U, m, n - 1) + 1;//Añadir
+
+        //return min(a, b, c);//Calcula el mínimo de los tres números
+        return 1;
+    }
 }
+
+
